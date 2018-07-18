@@ -7,13 +7,12 @@ class ProductList extends StatelessWidget {
     print('[Product widget] constructor');
   }
 
-  Widget _createNewItemWidget(BuildContext context, int index) {
+  Widget _buildItemCard(BuildContext context, int index) {
     print('[_createNewItemWidget] INDEX: $index');
     return Card(
       child: Column(
         children: <Widget>[
-          Image.network(
-              'https://cdn.pixabay.com/photo/2018/07/03/10/47/berries-3513547_1280.jpg'),
+          Image.asset('assets/woman.jpeg'),
           Container(
             margin: EdgeInsets.all(10.0),
             child: Text(products[index]),
@@ -23,14 +22,25 @@ class ProductList extends StatelessWidget {
     );
   }
 
+  Widget _buildProductList() {
+    if (0 == products.length) {
+      return Center(
+        child: Text('No products found, please add some.'),
+      );
+    }
+
+    return ListView.builder(
+      itemBuilder: _buildItemCard,
+      itemCount: products.length,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print('[Product widget] build()');
+
     return Expanded(
-      child: ListView.builder(
-        itemBuilder: _createNewItemWidget,
-        itemCount: products.length,
-      ),
+      child: _buildProductList(),
     );
   }
 }

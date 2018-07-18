@@ -6,7 +6,7 @@ import 'package:sprintf/sprintf.dart';
 class ProductManager extends StatefulWidget {
   final String startingProduct;
 
-  ProductManager({this.startingProduct = 'First Product'}) {
+  ProductManager({this.startingProduct}) {
     print('[ProductManager widget] constructor');
   }
 
@@ -22,8 +22,10 @@ class ProductManagerState extends State<ProductManager> {
   @override
   void initState() {
     print('[ProductManager State] initState()');
+    if (null != widget.startingProduct) {
+      _products.add(widget.startingProduct);
+    }
 
-    _products.add(widget.startingProduct);
     super.initState();
   }
 
