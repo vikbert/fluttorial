@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/product.dart';
 
 class ProductList extends StatelessWidget {
   final List<String> products;
@@ -15,7 +16,27 @@ class ProductList extends StatelessWidget {
           Image.asset('assets/woman.jpeg'),
           Container(
             margin: EdgeInsets.all(10.0),
-            child: Text(products[index]),
+            child: FlatButton(
+              child: Text(products[index]),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          ProductPage(products[index]))),
+            ),
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton(
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ProductPage(products[index]))),
+                child: Text('Product Details'),
+              ),
+            ],
           ),
         ],
       ),
