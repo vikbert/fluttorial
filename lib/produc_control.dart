@@ -35,7 +35,7 @@ class ProductControl extends StatelessWidget {
         ),
         shape: const StadiumBorder(),
         onPressed: () {
-          addProduct('Another Product');
+          addProduct({'title': 'Chocolate', 'image': 'assets/woman.jpeg'});
         },
       ),
     );

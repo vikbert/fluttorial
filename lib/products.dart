@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'pages/product.dart';
 
 class ProductList extends StatelessWidget {
-  final List<String> products;
+  final List<Map> products;
+  final Function deleteProduct;
 
-  ProductList([this.products = const []]) {
+  ProductList(this.products, this.deleteProduct) {
     print('[Product widget] constructor');
   }
 
@@ -13,27 +14,41 @@ class ProductList extends StatelessWidget {
     return Card(
       child: Column(
         children: <Widget>[
-          Image.asset('assets/woman.jpeg'),
+          Image.asset(products[index]['image']),
           Container(
             margin: EdgeInsets.all(10.0),
             child: FlatButton(
-              child: Text(products[index]),
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          ProductPage(products[index]))),
+              child: Text(products[index]['title']),
+              onPressed: () => Navigator
+                      .push<bool>(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => ProductPage(
+                                  products[index]['title'],
+                                  products[index]['image'])))
+                      .then((bool doDelete) {
+                    if (doDelete) {
+                      deleteProduct(index);
+                    }
+                  }),
             ),
           ),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            ProductPage(products[index]))),
+                onPressed: () => Navigator
+                        .push<bool>(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => ProductPage(
+                                    products[index]['title'],
+                                    products[index]['image'])))
+                        .then((bool value) {
+                      if (value) {
+                        deleteProduct(index);
+                      }
+                    }),
                 child: Text('Product Details'),
               ),
             ],

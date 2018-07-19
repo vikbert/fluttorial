@@ -4,7 +4,7 @@ import './produc_control.dart';
 import 'package:sprintf/sprintf.dart';
 
 class ProductManager extends StatefulWidget {
-  final String startingProduct;
+  final Map startingProduct;
 
   ProductManager({this.startingProduct}) {
     print('[ProductManager widget] constructor');
@@ -18,7 +18,8 @@ class ProductManager extends StatefulWidget {
 }
 
 class ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  List<Map> _products = [];
+
   @override
   void initState() {
     print('[ProductManager State] initState()');
@@ -29,10 +30,16 @@ class ProductManagerState extends State<ProductManager> {
     super.initState();
   }
 
-  void _addProduct(String product) {
+  void _addProduct(Map product) {
     setState(() {
       _products.add(product);
       print(sprintf('_product.length %d', [_products.length]));
+    });
+  }
+
+  void _deleteProduct(int index) {
+    setState(() {
+      _products.removeAt(index);
     });
   }
 
@@ -47,7 +54,7 @@ class ProductManagerState extends State<ProductManager> {
     return Column(
       children: <Widget>[
         ProductControl(_addProduct),
-        ProductList(_products),
+        ProductList(_products, _deleteProduct),
       ],
     );
   }
