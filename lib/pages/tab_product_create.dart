@@ -46,6 +46,7 @@ class ProductCreateTabState extends State<ProductCreateTab> {
               });
             },
           ),
+          SizedBox(height: 20.0),
           RaisedButton(
             color: Theme.of(context).primaryColor,
             onPressed: () {
@@ -56,7 +57,7 @@ class ProductCreateTabState extends State<ProductCreateTab> {
                 'image': 'assets/woman.jpeg'
               };
               widget.addProduct(product);
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.pushReplacementNamed(context, '/products');
             },
             child: Text('Save'),
           )

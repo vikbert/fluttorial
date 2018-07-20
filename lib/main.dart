@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/products_admin.dart';
 import 'pages/products.dart';
 import 'pages/product.dart';
+import 'pages/auth.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,11 +33,12 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'tutorial',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        accentColor: Colors.orange,
+        primarySwatch: Colors.lightGreen,
+        accentColor: Colors.lightGreenAccent,
       ),
       routes: {
-        '/': (BuildContext context) => ProductsPage(_products),
+        '/': (BuildContext context) => AuthPage(_products),
+        '/products': (BuildContext context) => ProductsPage(_products),
         '/admin': (BuildContext context) =>
             ProductsAdminPage(_products, _addProduct, _deleteProduct)
       },

@@ -7,12 +7,7 @@ class ProductPage extends StatelessWidget {
   final double price;
   final String image;
 
-  ProductPage({
-    this.title,
-    this.description,
-    this.price,
-    this.image
-  });
+  ProductPage({this.title, this.description, this.price, this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +25,14 @@ class ProductPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Image.asset(image),
-             Padding(
+            Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(title),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(description),
             ),
