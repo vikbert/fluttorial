@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import './product_list.dart';
+import '../product_list.dart';
 
-class ProductManager extends StatelessWidget {
+class ProductListTab extends ProductList {
   final List<Map<String, dynamic>> products;
-  ProductManager(this.products);
+
+  ProductListTab(this.products) : super(products);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ProductList(products),
-      ],
+        super.build(context),
+      ]
     );
   }
 }
