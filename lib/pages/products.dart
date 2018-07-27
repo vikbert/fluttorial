@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../product_manager.dart';
-import '../side_drawer.dart';
+import 'package:flutter_tutorial_udemy/product_manager.dart';
+import 'package:flutter_tutorial_udemy/side_drawer.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class ProductsPage extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
 
   ProductsPage(this.products);
 
@@ -13,6 +14,13 @@ class ProductsPage extends StatelessWidget {
       drawer: SideDrawer(products),
       appBar: AppBar(
         title: Text('EasyList'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.favorite),
+            color: Colors.limeAccent,
+            onPressed: () {},
+          ),
+        ],
       ),
       body: ProductManager(products),
     );

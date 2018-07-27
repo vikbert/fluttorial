@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pages/products.dart';
+import 'package:flutter_tutorial_udemy/pages/products.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class SideDrawer extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
 
   SideDrawer(this.products);
 
@@ -18,10 +19,10 @@ class SideDrawer extends StatelessWidget {
   Widget _productAdminLink(BuildContext context) {
     return ListTile(
       leading: Icon(
-        Icons.playlist_add,
+        Icons.mode_edit,
         color: Colors.white,
       ),
-      title: _linkItemText('All Products'),
+      title: _linkItemText('Manage Products'),
       onTap: () {
         Navigator.pushReplacementNamed(context, '/admin');
       },

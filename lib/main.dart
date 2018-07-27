@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'pages/products_admin.dart';
-import 'pages/products.dart';
-import 'pages/product.dart';
-import 'pages/auth.dart';
+
+import 'package:flutter_tutorial_udemy/pages/products_admin.dart';
+import 'package:flutter_tutorial_udemy/pages/products.dart';
+import 'package:flutter_tutorial_udemy/pages/product.dart';
+import 'package:flutter_tutorial_udemy/pages/auth.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,13 +14,12 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final List<Map<String, dynamic>> _products = [];
+  final List<Product> _products = [];
 
-  void _addProduct(Map<String, dynamic> product) {
+  void _addProduct(Product product) {
     setState(() {
       _products.add(product);
     });
-    print(_products);
   }
 
   void _deleteProduct(int index) {
@@ -44,17 +45,20 @@ class MyAppState extends State<MyApp> {
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
+
         if (pathElements[0] != '') {
           return null;
         }
+
         if (pathElements[1] == 'product') {
           final int index = int.parse(pathElements[2]);
+
           return MaterialPageRoute<bool>(
               builder: (BuildContext context) => ProductPage(
-                  title: _products[index]['title'],
-                  description: _products[index]['description'],
-                  image: _products[index]['image'],
-                  price: _products[index]['price']));
+                  title: _products[index].title,
+                  description: _products[index].description,
+                  image: _products[index].image,
+                  price: _products[index].price));
         }
       },
       onUnknownRoute: (RouteSettings settings) {

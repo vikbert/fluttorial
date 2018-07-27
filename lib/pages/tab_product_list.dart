@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../product_list.dart';
+import 'package:flutter_tutorial_udemy/product_list.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class ProductListTab extends ProductList {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
 
   ProductListTab(this.products) : super(products);
 

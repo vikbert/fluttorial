@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import './product_list.dart';
+import 'package:flutter_tutorial_udemy/product_list.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class ProductManager extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
   ProductManager(this.products);
 
   @override

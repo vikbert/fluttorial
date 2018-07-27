@@ -1,61 +1,66 @@
 import 'package:flutter/material.dart';
-import 'pages/product.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class ProductList extends StatelessWidget {
-  final List<Map> products;
+  final List<Product> products;
 
   ProductList(this.products);
 
-  Widget _buildItemCard(BuildContext context, int index) {
-    print('[_createNewItemWidget] INDEX: $index');
-    return Card(
-      child: Column(
-        children: <Widget>[
-          Image.asset(products[index]['image']),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 2.5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FlatButton(
-                  child: Text(
-                    products[index]['title'],
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-                  ),
-                  onPressed: () => Navigator.push<bool>(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => ProductPage(
-                                title: products[index]['title'],
-                                description: products[index]['description'],
-                                image: products[index]['image'],
-                                price: products[index]['price'],
-                              ))),
+  Widget _buildItemIcons(BuildContext context, int index) {
+    return ButtonBar(
+      alignment: MainAxisAlignment.center,
+      children: <Widget>[
+        IconButton(
+          icon: Icon(Icons.info_outline),
+          color: Theme.of(context).primaryColor,
+          onPressed: () => Navigator.pushNamed<bool>(
+              context, '/product/' + index.toString()),
+        ),
+        IconButton(
+          icon: Icon(Icons.favorite_border),
+          color: Colors.red,
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
+  Widget _buildItemInfo(BuildContext context, int index) {
+    return Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Flexible(
+                child: Text(
+                  products[index].title,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 2.5, horizontal: 6.5),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(5.0)),
-                  child: Text(
-                    '\$${products[index]['price'].toString()}',
-                    style: TextStyle(color: Colors.white),
-                  ),
+              ),
+              SizedBox(width: 10.0),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 2.5, horizontal: 6.5),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(5.0)),
+                child: Text(
+                  '\$${products[index].price.toString()}',
+                  style: TextStyle(color: Colors.white),
                 ),
-              ],
-            ),),
-          Container(
-            child: Text('Union Square, San Francisco'),
-            padding: EdgeInsets.symmetric(vertical: 2.5, horizontal: 6.5),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.all(Radius.circular(4.0))
-            ),
+              ),
+            ],
           ),
-          SizedBox(height: 15.0,),
-        ],
-      ),
+        ),
+        Container(
+          child: Text('Union Square, San Francisco'),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+        )
+      ],
     );
   }
 
@@ -67,7 +72,15 @@ class ProductList extends StatelessWidget {
     }
 
     return ListView.builder(
-      itemBuilder: _buildItemCard,
+      itemBuilder: (BuildContext context, index) => Card(
+            child: Column(
+              children: <Widget>[
+                Image.asset(products[index].image),
+                _buildItemInfo(context, index),
+                _buildItemIcons(context, index),
+              ],
+            ),
+          ),
       itemCount: products.length,
     );
   }

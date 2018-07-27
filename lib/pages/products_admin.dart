@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../side_drawer.dart';
-import 'tab_product_create.dart';
-import 'tab_product_list.dart';
+import 'package:flutter_tutorial_udemy/side_drawer.dart';
+import 'package:flutter_tutorial_udemy/pages/tab_product_create.dart';
+import 'package:flutter_tutorial_udemy/pages/tab_product_list.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class ProductsAdminPage extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
   final Function addProduct;
   final Function deleteProduct;
 

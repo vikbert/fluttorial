@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class AuthPage extends StatefulWidget {
-  final List<Map<String, dynamic>> products;
+  final List<Product> products;
 
   AuthPage(this.products);
 
@@ -10,53 +11,58 @@ class AuthPage extends StatefulWidget {
 }
 
 class AuthPageState extends State<AuthPage> {
-  String _email;
-  String _password;
-  bool _acceptedTerms = false;
+  String email = '';
+  String password = '';
+  bool acceptedTerms = false;
 
-  Widget _usernameInput() {
+  Widget _buildTextInputEmail() {
     return TextField(
       maxLength: 200,
-      decoration: InputDecoration(labelText: 'Username'),
+      decoration: InputDecoration(
+          labelText: 'Username', fillColor: Colors.white, filled: true),
       onChanged: (String value) {
         setState(() {
-          _email = value;
+          email = value;
         });
       },
     );
   }
 
-  Widget _passwordInput() {
+  Widget _buildTextInputPassword() {
     return TextField(
       obscureText: true,
-      decoration: InputDecoration(labelText: 'Password'),
+      decoration: InputDecoration(
+          labelText: 'Password', fillColor: Colors.white, filled: true),
       onChanged: (String value) {
         setState(() {
-          _password = value;
+          password = value;
         });
       },
     );
   }
 
-  Widget _termSwitch() {
+  Widget _buildSwitchListTerms() {
     return SwitchListTile(
-        value: _acceptedTerms,
+        value: acceptedTerms,
         title: Text('Accept Terms', textScaleFactor: 0.8),
         activeColor: Theme.of(context).primaryColor,
         onChanged: (bool value) {
           setState(() {
-            _acceptedTerms = value;
+            acceptedTerms = value;
           });
         });
   }
 
-  Widget _loginButton() {
+  Widget _buildButtonLogin() {
     return RaisedButton(
+      child: Text(
+        'Login',
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
+      ),
+      color: Theme.of(context).primaryColor,
       onPressed: () {
         Navigator.pushReplacementNamed(context, '/products');
       },
-      child: Text('Login'),
-      color: Theme.of(context).primaryColor,
     );
   }
 
@@ -64,18 +70,20 @@ class AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(
+          'Home',
+          style: TextStyle(color: Colors.limeAccent),
+        ),
       ),
       body: Container(
         child: ListView(
           children: <Widget>[
-            _usernameInput(),
-            _passwordInput(),
-            _termSwitch(),
-            SizedBox(
-              height: 12.0,
-            ),
-            _loginButton(),
+            _buildTextInputEmail(),
+            SizedBox(height: 12.0),
+            _buildTextInputPassword(),
+            _buildSwitchListTerms(),
+            SizedBox(height: 12.0),
+            _buildButtonLogin(),
           ],
         ),
         padding: EdgeInsets.all(10.0),
