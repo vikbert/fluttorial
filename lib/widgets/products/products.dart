@@ -15,11 +15,9 @@ class Products extends StatelessWidget {
         itemCount: products.length,
       );
     } else {
-      print('[products] NO product found');
       productCards = new Container(width: 0.0, height: 0.0);
     }
-    print('[products] found products');
-    print(products.length.toString());
+    
     return productCards;
   }
 
@@ -27,8 +25,7 @@ class Products extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ProductsModel>(
       builder: (BuildContext context, Widget child, ProductsModel model) {
-        print(model.products);
-        return _buildProductList(model.products);
+        return _buildProductList(model.displayedProducts);
       },
     );
   }
