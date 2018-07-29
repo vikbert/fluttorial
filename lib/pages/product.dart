@@ -1,114 +1,68 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import 'package:flutter_tutorial_udemy/scoped-models/products.dart';
+import 'package:flutter_tutorial_udemy/models/product.dart';
+import 'package:flutter_tutorial_udemy/widgets/ui_elements/title_default.dart';
 
 class ProductPage extends StatelessWidget {
-  final String title;
-  final String description;
-  final double price;
-  final String image;
+  final int productIndex;
 
-  ProductPage({this.title, this.description, this.price, this.image});
+  ProductPage(this.productIndex);
 
-  Widget _buildSocialIcons(BuildContext context) {
-    var _primaryGreen = Theme.of(context).primaryColor;
-
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 40.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Icon(Icons.call, color: _primaryGreen),
-              Text('CALL', style: TextStyle(color: _primaryGreen)),
-            ],
+  Widget _buildAddressPriceRow(double price) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'Union Square, San Francisco',
+          style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 5.0),
+          child: Text(
+            '|',
+            style: TextStyle(color: Colors.grey),
           ),
-          Column(
-            children: <Widget>[
-              Icon(Icons.gps_fixed, color: _primaryGreen),
-              Text('ROUTE', style: TextStyle(color: _primaryGreen),),
-            ],
-          ),
-          Column(
-            children: <Widget>[
-              Icon(Icons.share, color: _primaryGreen),
-              Text('SHARE', style: TextStyle(color: _primaryGreen)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProductTitles(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text('Union Square, San Francisco')
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 10.0,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 2.5, horizontal: 5.0),
-            decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(5.0)),
-            child: Text(
-              '\$${price.toString()}',
-              style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-          ),
-        ],
-      ),
+        ),
+        Text(
+          '\$' + price.toString(),
+          style: TextStyle(fontFamily: 'Oswald', color: Colors.grey),
+        )
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        Navigator.pop(context, false);
-        return Future.value(false);
+    return WillPopScope(onWillPop: () {
+      Navigator.pop(context, false);
+      return Future.value(false);
+    }, child: ScopedModelDescendant<ProductsModel>(
+      builder: (BuildContext context, Widget child, ProductsModel model) {
+        final Product product = model.products[productIndex];
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(product.title),
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(product.image),
+              TitleDefault(product.title),
+              _buildAddressPriceRow(product.price),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  product.description,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
+        );
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(image),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                children: <Widget>[
-                  _buildProductTitles(context),
-                  _buildSocialIcons(context),
-                  Text(description),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    ));
   }
 }

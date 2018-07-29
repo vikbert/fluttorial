@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial_udemy/models/product.dart';
 
 class AuthPage extends StatefulWidget {
-  final List<Product> products;
-
-  AuthPage(this.products);
-
   @override
   AuthPageState createState() => AuthPageState();
 }

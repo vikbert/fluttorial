@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tutorial_udemy/product_manager.dart';
-import 'package:flutter_tutorial_udemy/side_drawer.dart';
-import 'package:flutter_tutorial_udemy/models/product.dart';
+import 'package:flutter_tutorial_udemy/widgets/products/products.dart';
 
 class ProductsPage extends StatelessWidget {
-  final List<Product> products;
-
-  ProductsPage(this.products);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideDrawer(products),
+      drawer: _buildSlideDrawer(context),
       appBar: AppBar(
         title: Text('EasyList'),
         actions: <Widget>[
@@ -22,7 +16,27 @@ class ProductsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ProductManager(products),
+      body: Products(),
+    );
+  }
+
+  Widget _buildSlideDrawer(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          AppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Choose'),
+          ),
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Manage Products'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/admin');
+            },
+          )
+        ],
+      ),
     );
   }
 }
