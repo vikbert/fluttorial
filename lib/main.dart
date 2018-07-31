@@ -5,7 +5,7 @@ import 'package:flutter_tutorial_udemy/pages/products_admin.dart';
 import 'package:flutter_tutorial_udemy/pages/products.dart';
 import 'package:flutter_tutorial_udemy/pages/product.dart';
 import 'package:flutter_tutorial_udemy/pages/auth.dart';
-import 'package:flutter_tutorial_udemy/scoped-models/products.dart';
+import 'package:flutter_tutorial_udemy/scoped-models/main.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,8 +17,8 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<ProductsModel>(
-      model: ProductsModel(),
+    return ScopedModel<MainModel>(
+      model: MainModel(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'tutorial',
@@ -39,8 +39,7 @@ class MyAppState extends State<MyApp> {
           if (pathElements[1] == 'product') {
             final int index = int.parse(pathElements[2]);
             return MaterialPageRoute<bool>(
-              builder: (BuildContext context) =>
-                  ProductPage(index),
+              builder: (BuildContext context) => ProductPage(index),
             );
           }
           return null;

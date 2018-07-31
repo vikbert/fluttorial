@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Product
-{
+class Product {
   final String title;
   final String description;
   final String image;
@@ -10,9 +9,8 @@ class Product
 
   Product(
       {@required this.title,
-        this.description,
-        this.price,
-        this.image,
-        this.isFavorite = false
-      });
+      this.description,
+      this.price,
+      this.image,
+      this.isFavorite = false});
 }
