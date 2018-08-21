@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_udemy/widgets/products/products.dart';
 
 import 'package:scoped_model/scoped_model.dart';
-import 'package:flutter_tutorial_udemy/scoped-models/products.dart';
+import 'package:flutter_tutorial_udemy/scoped-models/main.dart';
 
 class ProductsPage extends StatelessWidget {
   @override
@@ -12,10 +12,11 @@ class ProductsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('EasyList'),
         actions: <Widget>[
-          ScopedModelDescendant<ProductsModel>(builder:
-              (BuildContext context, Widget child, ProductsModel model) {
+          ScopedModelDescendant<MainModel>(
+              builder: (BuildContext context, Widget child, MainModel model) {
             return IconButton(
-              icon: Icon(model.showFavorites ? Icons.favorite : Icons.favorite_border),
+              icon: Icon(
+                  model.showFavorites ? Icons.favorite : Icons.favorite_border),
               color: Colors.limeAccent,
               onPressed: () {
                 model.toggleDisplayMode();

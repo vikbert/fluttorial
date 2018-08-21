@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:flutter_tutorial_udemy/widgets/helpers/ensure_visible.dart';
 import 'package:flutter_tutorial_udemy/models/product.dart';
-import 'package:flutter_tutorial_udemy/scoped-models/products.dart';
+import 'package:flutter_tutorial_udemy/scoped-models/main.dart';
 
 class ProductEditPage extends StatefulWidget {
   @override
@@ -88,8 +88,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
   }
 
   Widget _buildSubmitButton() {
-    return ScopedModelDescendant<ProductsModel>(
-      builder: (BuildContext context, Widget child, ProductsModel model) {
+    return ScopedModelDescendant<MainModel>(
+      builder: (BuildContext context, Widget child, MainModel model) {
         return RaisedButton(
           child: Text('Save'),
           textColor: Colors.white,
@@ -158,8 +158,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<ProductsModel>(
-      builder: (BuildContext context, Widget child, ProductsModel model) {
+    return ScopedModelDescendant<MainModel>(
+      builder: (BuildContext context, Widget child, MainModel model) {
         final Widget pageContent =
             _buildPageContent(context, model.selectedProduct);
 

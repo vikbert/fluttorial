@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:flutter_tutorial_udemy/scoped-models/products.dart';
+import 'package:flutter_tutorial_udemy/scoped-models/main.dart';
 import 'package:flutter_tutorial_udemy/models/product.dart';
 import 'package:flutter_tutorial_udemy/widgets/ui_elements/title_default.dart';
 
@@ -44,7 +44,7 @@ class ProductCard extends StatelessWidget {
 
   Widget _buildFavoriteButton(BuildContext context, int index) {
     return ScopedModelDescendant(
-      builder: (BuildContext context, Widget child, ProductsModel model) {
+      builder: (BuildContext context, Widget child, MainModel model) {
         return IconButton(
             icon: Icon(model.products[index].isFavorite == true
                 ? Icons.favorite
